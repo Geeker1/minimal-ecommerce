@@ -1,6 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Minimal Ecommerce With GraphQL
 
-## Available Scripts
+A simple ecommerce site to showcase the power of graphql and django
 
 In the project directory, you can run:
 
