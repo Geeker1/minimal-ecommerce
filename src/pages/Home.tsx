@@ -72,7 +72,7 @@ const HomeStyling = styled.section`
 		flex-direction: column;
 
 		& .slider-main{
-			height: 600px;
+			// height: 600px;
 			.sli{
 				display: flex;
 				.image{

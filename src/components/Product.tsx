@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import orange from '../styles/img/orange.png'
 import { Icon } from 'semantic-ui-react';
+import _ from 'lodash';
 
 const ProductList = styled.section`
 	display: flex;
@@ -36,7 +37,8 @@ const ProductList = styled.section`
 const Product: React.FC = () =>{
 	return (
 		<ProductList>
-			<div className='product-item'>
+			{_.times(6).map(()=>{
+				return <div className='product-item'>
 				<img src={orange} />
 				<div className='content'>
 					<h4>Concho Product</h4>
@@ -52,86 +54,7 @@ const Product: React.FC = () =>{
 					</div>
 				</div>
 			</div>
-			<div className='product-item'>
-				<img src={orange} />
-				<div className='content'>
-					<h4>Concho Product</h4>
-					<div className='text'>
-						<p>A sweet reminder not to cross me .....</p>
-						<span>
-							<Icon
-								circular
-								inverted
-								color='orange'
-								name='add to cart'/>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div className='product-item'>
-				<img src={orange} />
-				<div className='content'>
-					<h4>Concho Product</h4>
-					<div className='text'>
-						<p>A sweet reminder not to cross me .....</p>
-						<span>
-							<Icon
-								circular
-								inverted
-								color='orange'
-								name='add to cart'/>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div className='product-item'>
-				<img src={orange} />
-				<div className='content'>
-					<h4>Concho Product</h4>
-					<div className='text'>
-						<p>A sweet reminder not to cross me .....</p>
-						<span>
-							<Icon
-								circular
-								inverted
-								color='orange'
-								name='add to cart'/>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div className='product-item'>
-				<img src={orange} />
-				<div className='content'>
-					<h4>Concho Product</h4>
-					<div className='text'>
-						<p>A sweet reminder not to cross me .....</p>
-						<span>
-							<Icon
-								circular
-								inverted
-								color='orange'
-								name='add to cart'/>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div className='product-item'>
-				<img src={orange} />
-				<div className='content'>
-					<h4>Concho Product</h4>
-					<div className='text'>
-						<p>A sweet reminder not to cross me .....</p>
-						<span>
-							<Icon
-								circular
-								inverted
-								color='orange'
-								name='add to cart'/>
-						</span>
-					</div>
-				</div>
-			</div>
+			})}
 		</ProductList>
 	)
 }

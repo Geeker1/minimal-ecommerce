@@ -47,7 +47,7 @@ const Navigation = styled.nav`
 		margin: 0;
 		list-style: none;
 		text-transform: uppercase;
-		font-size: 15px;
+		font-size: 13px;
 	}
 
 	a{
