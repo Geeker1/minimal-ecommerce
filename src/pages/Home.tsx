@@ -56,7 +56,7 @@ const HomeStyling = styled.section`
 		align-items: center;
 		flex-direction: column;
 		text-align: center;
-
+		padding: 15px;
 		h1{
 			font-size: calc(25px + 50%);
 			letter-spacing: 2px;
@@ -133,7 +133,7 @@ const Home: React.FC = () =>{
 					different Products ranging from clothing to shoes, and
 					jewelries e.t.c.</p>
 					<Link to='/categories'>
-					<Button className='cta' color='teal'>
+					<Button className='cta' color='orange'>
 						Shop All Products
 					</Button>
 					</Link>

@@ -33,7 +33,7 @@ const Navigation = styled.nav`
 	}
 
 	& .icon-list sup{
-		color: teal;
+		color: #fff;
 	}
 
 	& .icon-list li img{
@@ -48,6 +48,7 @@ const Navigation = styled.nav`
 		list-style: none;
 		text-transform: uppercase;
 		font-size: 13px;
+		color: orange;
 	}
 
 	a{

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Divider, Header, Icon, Container, Form, Input } from 'semantic-ui-react';
+import { Button, Divider, Container, Form, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
