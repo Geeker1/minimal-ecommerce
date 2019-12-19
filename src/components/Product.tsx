@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import orange from '../styles/img/orange.png'
-import { Icon, Placeholder } from 'semantic-ui-react';
+import orange from '../styles/img/orange.png';
+import { Placeholder, Button, Icon } from 'semantic-ui-react';
 import _ from 'lodash';
 import { useQuery } from '@apollo/react-hooks';
-import {FETCH_ALL_PRODUCTS} from '../queries';
+import {FETCH_ALL_PRODUCTS,AllProductData,ProductDetail, ProductVars, ProductInterface} from '../queries/product';
 import Image from './Image';
 
 
 const ProductList = styled.section`
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 
+	.button-div{
+		text-align: center;
+		width: 100%;
+		margin: 30px 0;
+
+		button{
+			width: 100%;
+			padding: 20px 0;
+		}
+	}
 	.product-item{
 		width: 350px;
 		max-width: 100%;
@@ -40,7 +50,6 @@ const ProductList = styled.section`
 `
 const LoadingItem: React.FC = props=> (
 	<>
-
 	{_.times(6).map((key,index)=>{
 		return(
 			<div key={key} className='product-item'>
@@ -50,22 +59,73 @@ const LoadingItem: React.FC = props=> (
 			</div>
 		)
 	})}
-
 	</>
-	
 )
 
 const Product: React.FC = () =>{
-	const { loading, error, data } = useQuery(FETCH_ALL_PRODUCTS);
+	
+	const { loading, error, data, fetchMore } = useQuery<ProductInterface, ProductVars>(FETCH_ALL_PRODUCTS);
+	const [load, setLoad] = useState(false);
+	
+	const loadMore = async function(){
+		setLoad(true)
+		await fetchMore({
+			variables: {
+				cursor:data!.allProducts.pageInfo.endCursor
+			},
+			updateQuery: (previousResult, { fetchMoreResult }) => {
+				const newEdges = fetchMoreResult!.allProducts.edges;
+				const pageInfo = fetchMoreResult!.allProducts.pageInfo;
+	
+				return newEdges.length
+				  ? {
+					  allProducts: {
+						__typename: previousResult.allProducts.__typename,
+						edges: [...previousResult.allProducts.edges, ...newEdges],
+						pageInfo
+					  }
+					}
+				  : previousResult;
+			  }
+		});
+		setLoad(false);
+	}
+	
 	return (
 		<ProductList>
-			{(!error && !loading) ? _.times(6).map((key,index)=>{
+
+			{(!error && !loading) ? data!.allProducts.edges.map((key: AllProductData,index: number)=>{
+				let item:ProductDetail = key.node;
 				return (
-					<div key={key} className='product-item'>
+					<div key={index} className='product-item'>
 						<Image index={index} src={orange}/>
+						<div className='content'>
+							<h4>{ item.name }</h4>
+							<div className='text'>
+								<p>{item.shortDescription.substring(0, 40)} {item.shortDescription.length > 40 ? '....': ''}</p>
+								<span>
+									<Icon
+										circular
+										inverted
+										color='orange'
+										name='add to cart'/>
+								</span>
+							</div>
+						</div>
 					</div>
 				)
 			}):<LoadingItem/>}
+
+			<div className="button-div">
+				<Button 
+					loading={load} 
+					size="big" 
+					disabled={(error || loading || data!.allProducts.pageInfo.hasNextPage) ? false : true} 
+					color='orange'
+					onClick={()=>loadMore()}>
+					Load More Products
+				</Button>
+			</div>
 		</ProductList>
 	)
 }

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Menu, MenuItemProps,Input, Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
+import ProductMenu from '../components/Menu';
 import Product from '../components/Product';
 
 const ProductWrapper = styled.section`
@@ -25,13 +26,6 @@ const ProductWrapper = styled.section`
 
 const Category: React.FC = () =>{
 
-	const [ state, setState ] = useState<string | undefined>('All')
-	const { Item } = Menu;
-
-	const handleItemClick = (
-		e: React.MouseEvent,
-		{ name }:MenuItemProps) => setState(name)
-
 	return (
 		<ProductWrapper>
 			<Container>
@@ -39,46 +33,7 @@ const Category: React.FC = () =>{
 				 for Traditional Attires and Shoes</h1>
 				<p>Starting your Project with Mariano. Only $20!</p>
 
-				<Menu
-					stackable
-					color='orange'
-					className='menu'
-					pointing
-					secondary
-				>
-					<Item
-						name='All'
-						active={state === 'All'}
-						onClick={handleItemClick}
-					/>
-					<Item
-						name="Men's Clothing"
-						active={state === "Men's Clothing"}
-						onClick={handleItemClick}
-					/>
-					<Item
-						name='Fashion Shoes'
-						active={state === "Fashion Shoes"}
-						onClick={handleItemClick}
-					/>
-					<Item
-						name='Hats and Caps'
-						active={state === "Hats and Caps"}
-						onClick={handleItemClick}
-					/>
-					<Item
-						name='Mobile Phones'
-						active={state === "Mobile Phones"}
-						onClick={handleItemClick}
-					/>
-
-					<Menu.Menu position='right'>
-			          <Item>
-			            <Input icon='search' placeholder='Search...' />
-			          </Item>
-			        </Menu.Menu>
-				</Menu>
-
+				<ProductMenu/>
 				<Product/>
 			</Container>
 		</ProductWrapper>
